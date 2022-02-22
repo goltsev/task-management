@@ -1,0 +1,400 @@
+basePath: /api/v1
+definitions:
+  handlers.Column:
+    properties:
+      name:
+        type: string
+      pos:
+        type: integer
+    type: object
+  handlers.Comment:
+    properties:
+      text:
+        type: string
+    type: object
+  handlers.Project:
+    properties:
+      desc:
+        type: string
+      name:
+        type: string
+    type: object
+  handlers.Task:
+    properties:
+      col:
+        type: integer
+      desc:
+        type: string
+      name:
+        type: string
+      prio:
+        type: integer
+    type: object
+info:
+  contact: {}
+  title: Task Management API
+paths:
+  /columns/{columnid}:
+    delete:
+      parameters:
+      - description: Column ID
+        in: path
+        name: columnid
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: Delete column with ID
+      tags:
+      - columns
+    get:
+      parameters:
+      - description: Column ID
+        in: path
+        name: columnid
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: Get column with ID
+      tags:
+      - columns
+    post:
+      parameters:
+      - description: Column ID
+        in: path
+        name: columnid
+        required: true
+        type: integer
+      - description: Column info
+        in: body
+        name: column
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.Column'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: Update column with ID
+      tags:
+      - columns
+  /columns/{columnid}/tasks:
+    get:
+      parameters:
+      - description: Column ID
+        in: path
+        name: columnid
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: Get list of tasks from column with ID
+      tags:
+      - tasks
+    post:
+      parameters:
+      - description: Column ID
+        in: path
+        name: columnid
+        required: true
+        type: integer
+      - description: Task info
+        in: body
+        name: task
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.Task'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: Create task in column with ID
+      tags:
+      - tasks
+  /comments/{commentid}:
+    delete:
+      parameters:
+      - description: Comment ID
+        in: path
+        name: commentid
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: Delete comment with ID
+      tags:
+      - comments
+    get:
+      parameters:
+      - description: Comment ID
+        in: path
+        name: commentid
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: Get comment with ID
+      tags:
+      - comments
+    post:
+      parameters:
+      - description: Comment ID
+        in: path
+        name: commentid
+        required: true
+        type: integer
+      - description: Comment text
+        in: body
+        name: comment
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.Comment'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: Update comment with ID
+      tags:
+      - comments
+  /projects:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: Get Project list
+      tags:
+      - projects
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Project parameters
+        in: body
+        name: info
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.Project'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: Create Project
+      tags:
+      - projects
+  /projects/{projectid}:
+    delete:
+      parameters:
+      - description: Project ID
+        in: path
+        name: projectid
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: Delete Project
+      tags:
+      - projects
+    get:
+      parameters:
+      - description: Project ID
+        in: path
+        name: projectid
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: Get Project with ID
+      tags:
+      - projects
+    post:
+      parameters:
+      - description: Project ID
+        in: path
+        name: projectid
+        required: true
+        type: integer
+      - description: Project information
+        in: body
+        name: info
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.Project'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: Update Project
+      tags:
+      - projects
+  /projects/{projectid}/columns:
+    get:
+      parameters:
+      - description: Project ID
+        in: path
+        name: projectid
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: Get list of columns in project with ID
+      tags:
+      - columns
+    post:
+      parameters:
+      - description: Project ID
+        in: path
+        name: projectid
+        required: true
+        type: integer
+      - description: Column info
+        in: body
+        name: column
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.Column'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: Create column in project
+      tags:
+      - columns
+  /projects/{projectid}/tasks:
+    get:
+      parameters:
+      - description: Project ID
+        in: path
+        name: projectid
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: Get list of tasks for project with ID
+      tags:
+      - tasks
+  /tasks/{taskid}:
+    delete:
+      parameters:
+      - description: Task ID
+        in: path
+        name: taskid
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: Delete task with ID
+      tags:
+      - tasks
+    get:
+      parameters:
+      - description: Task ID
+        in: path
+        name: taskid
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: Get task with ID
+      tags:
+      - tasks
+    post:
+      parameters:
+      - description: Task ID
+        in: path
+        name: taskid
+        required: true
+        type: integer
+      - description: Task info
+        in: body
+        name: task
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.Task'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: Update task with ID
+      tags:
+      - tasks
+  /tasks/{taskid}/comments:
+    get:
+      parameters:
+      - description: Task ID
+        in: path
+        name: taskid
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: Get list of comments from task with ID
+      tags:
+      - comments
+    post:
+      parameters:
+      - description: Task ID
+        in: path
+        name: taskid
+        required: true
+        type: integer
+      - description: Comment text
+        in: body
+        name: comment
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.Comment'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: Create comment for task with ID
+      tags:
+      - comments
+swagger: "2.0"
